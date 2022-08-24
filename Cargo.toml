@@ -3,6 +3,9 @@ name = "proc-macro3"
 version = "0.1.0"
 edition = "2021"
 author = "radiish"
+repository = "https://github.com/istanbul-not-constantinople/proc-macro3"
+license = "MIT OR Apache-2.0"
+description = "defines a macro that imports either from `proc_macro` or `proc-macro2` depending on the `proc-macro2` feature flag."
 
 [dependencies]
 # *do not* enable the proc-macro2 feature in a proc-macro context
