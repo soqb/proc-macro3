@@ -1,6 +1,8 @@
 #[cfg(feature = "proc-macro2")]
+#[doc(hidden)]
 pub use proc_macro2 as _proc_macro2_impl;
-#[cfg(not(feature = "proc_macro2"))]
+#[cfg(not(feature = "proc-macro2"))]
+#[doc(hidden)]
 pub mod _proc_macro2_impl {}
 
 /// creates a module with any name (by default `proc_macro`) that
