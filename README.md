@@ -1,5 +1,5 @@
 # proc-macro3
-context-based cfg for proc macros - all the benefits of proc-macro2 with none of the slow compile times
+defines a macro that imports either from `proc_macro` or `proc-macro2` depending on the `proc-macro2` feature flag.
 
 ## Examples
 ```rust
