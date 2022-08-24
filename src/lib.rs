@@ -1,12 +1,21 @@
-#[cfg(proc_macro)]
-extern crate proc_macro;
-#[cfg(proc_macro)]
-pub use proc_macro::*;
-#[cfg(feature = "proc_macro2")]
-extern crate proc_macro2;
-#[cfg(feature = "proc_macro2")]
-pub use proc_macro2::*;
+#[cfg(feature = "proc-macro2")]
+pub use proc_macro2 as _proc_macro2_impl;
+#[cfg(not(feature = "proc_macro2"))]
+pub mod _proc_macro2_impl {}
 
-// do not allow use of this library without the "proc_macro2" flag outside of proc_macro contexts
-#[cfg(not(any(proc_macro, feature = "proc_macro2"))]
-core::compile_error!("this crate must be used either with the \"proc_macro2\" feature flag or in a proc_macro context");
+/// creates a module with any name (by default `proc_macro`) that
+/// re-exports either all of `proc_macro` or all of `proc_macro2` items.
+/// 
+/// should not be used in a `proc-macro` context if the `proc_macro2` feature is set
+#[macro_export]
+macro_rules! import {
+	($name:ident) => {
+		mod $name {
+			use $crate::_proc_macro2_impl::*;
+			#[cfg(proc_macro)]
+			extern crate proc_macro as _proc_macro_impl;
+			pub use _proc_macro_impl::*;
+		}
+	}
+    () => { import!(proc_macro) }
+}

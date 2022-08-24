@@ -2,9 +2,11 @@
 name = "proc-macro3"
 version = "0.1.0"
 edition = "2021"
+author = "radiish"
 
 [dependencies]
-proc-macro2 = { required = false, version = "^1.0" }
+# *do not* enable the proc-macro2 feature in a proc-macro context
+proc-macro2 = { optional = true, version = "^1.0" }
 
 [features]
-proc_macro2 = ["proc-macro2"]
+span-locations = ["proc-macro2/span-locations"]
